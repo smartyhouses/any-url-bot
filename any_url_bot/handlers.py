@@ -7,8 +7,8 @@ from aiogram.utils import keyboard
 from any_url_bot import url as _url
 
 _START_TEXT = (
-    " привет я портал твой облачная система"
-    "just like a WebApp."
+    "привет я портал твой облачная система"
+    "ага. "
 )
 _INVALID_URL_TEXT = "The URL you sent is invalid."
 
