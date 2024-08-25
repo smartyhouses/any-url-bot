@@ -7,7 +7,7 @@ from aiogram.utils import keyboard
 from any_url_bot import url as _url
 
 _START_TEXT = (
-    "Send me an HTTPS URL and I'll reply with a message with a button to open it, "
+    " привет я портал твой облачная система"
     "just like a WebApp."
 )
 _INVALID_URL_TEXT = "The URL you sent is invalid."
