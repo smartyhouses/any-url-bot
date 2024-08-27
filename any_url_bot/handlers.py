@@ -49,7 +49,7 @@ async def handle_url(msg: aiogram.types.Message):
     try:
         web_app = _url.WebAppInfo(url=url)
     except pydantic.ValidationError:
-        return msg.answer(text=no_url(msg.tex)
+        return msg.answer(text=no_url(msg.text))
 
     kb_builder = keyboard.InlineKeyboardBuilder()
     kb_builder.button(text=msg.text, web_app=web_app)
