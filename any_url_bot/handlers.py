@@ -3,7 +3,6 @@ import aiogram.exceptions
 import aiogram.types
 import pydantic
 from aiogram.utils import keyboard
-from g4f.client import Client
 from any_url_bot import url as _url
 import subprocess
 import sys
@@ -17,6 +16,7 @@ def check_and_install(package):
 check_and_install('g4f')
 check_and_install('curl_cffi')
 check_and_install('fastapi')
+from g4f.client import Client
 
 
 _START_TEXT = (
