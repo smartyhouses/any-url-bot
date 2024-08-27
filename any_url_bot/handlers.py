@@ -3,8 +3,21 @@ import aiogram.exceptions
 import aiogram.types
 import pydantic
 from aiogram.utils import keyboard
-
+from g4f.client import Client
 from any_url_bot import url as _url
+import subprocess
+import sys
+
+def check_and_install(package):
+    try:
+        __import__(package)
+    except ImportError:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+check_and_install('g4f')
+check_and_install('curl_cffi')
+check_and_install('fastapi')
+
 
 _START_TEXT = (
     "привет я портал твой облачная система"
@@ -14,6 +27,14 @@ _INVALID_URL_TEXT = "The URL you sent is invalid."
 
 
 router = aiogram.Router()
+
+def no_url(text):
+    client = Client()
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[{"role": "user", "content": text}],
+        )
+    return response.choices[0].message.content
 
 
 @router.message(commands="start", content_types=aiogram.types.ContentType.TEXT)
@@ -28,7 +49,7 @@ async def handle_url(msg: aiogram.types.Message):
     try:
         web_app = _url.WebAppInfo(url=url)
     except pydantic.ValidationError:
-        return msg.answer(text=_INVALID_URL_TEXT)
+        return msg.answer(text=no_url(msg.tex)
 
     kb_builder = keyboard.InlineKeyboardBuilder()
     kb_builder.button(text=msg.text, web_app=web_app)
